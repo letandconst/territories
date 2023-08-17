@@ -68,7 +68,7 @@ const TerritoryList = ({ territories }: TerritoryListProps) => {
   };
 
   return (
-    <Flex gap="20px" flexDir="column">
+    <Flex gap="20px" flexDir="column" padding="50px">
       <>
         <Heading>Territories</Heading>
         <Text>Here are the list of territories:</Text>
