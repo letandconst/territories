@@ -3,9 +3,11 @@ import { Box, Button, Center } from "@chakra-ui/react";
 import axios from "axios";
 import React, { useState, FormEvent } from "react";
 import { useRouter } from "next/router";
+import { useAuthContext } from "@/context/AuthContext";
 
 const Login = () => {
   const router = useRouter();
+  const { login } = useAuthContext();
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -25,17 +27,19 @@ const Login = () => {
     event.preventDefault();
 
     try {
-      //   const res = await axios.post(
-      //     `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/Account/SignIn`,
-      //     formData
-      //   );
+      // const res = await axios.post(
+      //   `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/Account/SignIn`,
+      //   formData
+      // );
 
       if (!formData.username || !formData.password) {
         setErrorMessage("Invalid username or password");
         return;
       }
 
-      if (formData.username === "foo" && formData.password === "bar") {
+      const success = login(formData.username, formData.password);
+
+      if (success) {
         router.push("/");
       } else {
         setErrorMessage("Invalid username or password");
